@@ -1,0 +1,50 @@
+{
+    "name": "pucpr-iot-introduction",
+    "image": "mcr.microsoft.com/devcontainers/python:3.12-bookworm",
+    "runArgs": [
+        "--rm",
+        "--name", "vsc-${localWorkspaceFolderBasename}",
+        // "--env-file", ".env"
+    ],
+    "hostRequirements": {
+        "cpus": 4
+    },
+    "mounts": [
+        {
+            "source": "/dev",
+            "target": "/dev",
+            "type": "bind"
+        }
+    ],   
+    "waitFor": "onCreateCommand",
+    "updateContentCommand": "#python -m pip install -r requirements.txt",
+    "postCreateCommand": "",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                // Development
+                "paulober.pico-w-go",
+                "raspberry-pi.raspberry-pi-pico",
+                "almenon.arepl",
+                // Environment
+                "Cardinal90.multi-cursor-case-preserve",
+                "ryu1kn.partial-diff",
+                "christian-kohler.path-intellisense",
+                "JannisX11.batch-rename-extension",
+                "njzy.stats-bar",
+                // Utils
+                "humao.rest-client",
+                "mhutchie.git-graph",
+                // Style and formatting
+                "charliermarsh.ruff",
+                "DavidAnson.vscode-markdownlint",
+                "mohsen1.prettify-json",
+                "EditorConfig.EditorConfig",
+                "ms-python.isort",
+                // Language
+                "streetsidesoftware.code-spell-checker",
+                "streetsidesoftware.code-spell-checker-portuguese-brazilian"
+            ]
+        }
+    }
+}
