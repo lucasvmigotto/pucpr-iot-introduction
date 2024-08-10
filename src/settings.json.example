@@ -1,0 +1,13 @@
+{
+    "wifi": {
+        "ssid": "",
+        "password": ""
+    },
+    "thingspeak": {
+        "channel": 0,
+        "apikey": {
+            "write": "",
+            "read": ""
+        }
+    }
+}
