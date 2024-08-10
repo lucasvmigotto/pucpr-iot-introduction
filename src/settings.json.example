@@ -1,6 +1,8 @@
 {
     "definitions": {
-        "sleep_interval": 1
+        "sleep_interval": 1,
+        "min_temperature": 31,
+        "min_humidity": 70
     },
     "sensors": {
         "dht11": 15
