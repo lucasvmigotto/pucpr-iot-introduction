@@ -1,11 +1,12 @@
 import sys
 from time import sleep
 from machine import Pin
-from dht import DHT11
+from components.dht11 import DHT11
 from helpers.settings import init_setup
 
 
 SETTINGS_FILE_PATH: str = './settings.json'
+
 
 def main() -> None:
     try:
@@ -14,17 +15,12 @@ def main() -> None:
 
         sensor: DHT11 = DHT11(Pin(SETTINGS.get('SENSORS').get('dht11')))
 
-        PRINT_TEMPLATE: str = '🌡️: {temperature:.2f}\n💧: {humidity:.2f}'
-
         while True:
-            sensor.measure()
+            sensor.refresh()
 
-            print(PRINT_TEMPLATE.format(
-                temperature=sensor.temperature(),
-                humidity=sensor.humidity()
-            ), end=f"\n{'=' * 10}\n")
+            print(sensor)
 
-            sleep(1 * .5)
+            sleep(SETTINGS.get('DEFINITIONS').get('sleep_interval'))
 
     except KeyboardInterrupt:
         sys.exit(0)
