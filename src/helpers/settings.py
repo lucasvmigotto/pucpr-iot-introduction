@@ -7,6 +7,8 @@ def init_setup(file_path: str) -> dict[str, str]:
         file_ref.close()
 
     return {
+        'SENSORS': SETTINGS.get('sensors'),
+
         'SSID': SETTINGS.get('wifi').get('ssid'),
         'PSWD': SETTINGS.get('wifi').get('password'),
 

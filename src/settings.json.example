@@ -1,4 +1,7 @@
 {
+    "sensors_pin": {
+        "dht11": 15
+    },
     "wifi": {
         "ssid": "",
         "password": ""
