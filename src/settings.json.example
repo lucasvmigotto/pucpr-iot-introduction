@@ -1,4 +1,10 @@
 {
+    "definitions": {
+        "sleep_interval": 1
+    },
+    "sensors": {
+        "dht11": 15
+    },
     "wifi": {
         "ssid": "",
         "password": ""
