@@ -2,7 +2,7 @@ import sys
 from time import sleep
 from machine import Pin
 from components.dht11 import DHT11
-from helpers.settings import init_setup
+from helpers.settings import Settings
 
 
 SETTINGS_FILE_PATH: str = './settings.json'
@@ -11,9 +11,10 @@ SETTINGS_FILE_PATH: str = './settings.json'
 def main() -> None:
     try:
 
-        SETTINGS: dict = init_setup(SETTINGS_FILE_PATH)
-        DHT11_PIN: int = SETTINGS.get('SENSORS').get('dht11')
-        SLEEP_INTERVAL: int = SETTINGS.get('DEFINITIONS').get('sleep_interval')
+        SETTINGS: Settings = Settings(SETTINGS_FILE_PATH)
+
+        DHT11_PIN: int = SETTINGS.get_config('sensors', 'dht11')
+        SLEEP_INTERVAL: int = SETTINGS.get_config('definitions', 'sleep_interval')
 
         sensor: DHT11 = DHT11(Pin(DHT11_PIN))
 

@@ -1,30 +1,20 @@
 from json import loads
 
 
-def init_setup(file_path: str) -> dict[str, str]:
-    with open(file_path) as file_ref:
-        SETTINGS: dict = loads(file_ref.read())
-        file_ref.close()
+def get_config(data, *keys) -> str | int | None:
+    if isinstance(data.get(keys[0]), dict):
+        return get_config(data.get(keys[0]), *keys[1:])
+    else:
+        return data.get(keys[0])
 
-    return {
-        'DEFINITIONS': SETTINGS.get('definitions'),
 
-        'SENSORS': SETTINGS.get('sensors'),
+class Settings:
 
-        'SSID': SETTINGS.get('wifi').get('ssid'),
-        'PSWD': SETTINGS.get('wifi').get('password'),
+    def __init__(self, file_path: str) -> None:
+        with open(file_path, 'r') as file_ref:
+            self.__config: dict = loads(file_ref.read())
+            file_ref.close()
 
-        'THINGSPEAK_CHANNEL_CODE': SETTINGS\
-            .get('thingspeak')\
-            .get('channel'),
+    def get_config(self, *keys) -> str | int | None:
+        return get_config(self.__config, *keys)
 
-        'THINGSPEAK_API_KEY_READ': SETTINGS\
-            .get('thingspeak')\
-            .get('apikey')\
-            .get('read'),
-
-        'THINGSPEAK_API_KEY_WRITE': SETTINGS\
-            .get('thingspeak')\
-            .get('apikey')\
-            .get('read')
-    }
