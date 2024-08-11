@@ -5,7 +5,8 @@
         "min_humidity": 70
     },
     "sensors": {
-        "dht11": 15
+        "dht11": 15,
+        "relay": 13
     },
     "wifi": {
         "ssid": "",
