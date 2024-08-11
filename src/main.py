@@ -12,15 +12,17 @@ def main() -> None:
     try:
 
         SETTINGS: dict = init_setup(SETTINGS_FILE_PATH)
+        DHT11_PIN: int = SETTINGS.get('SENSORS').get('dht11')
+        SLEEP_INTERVAL: int = SETTINGS.get('DEFINITIONS').get('sleep_interval')
 
-        sensor: DHT11 = DHT11(Pin(SETTINGS.get('SENSORS').get('dht11')))
+        sensor: DHT11 = DHT11(Pin(DHT11_PIN))
 
         while True:
             sensor.refresh()
 
             print(sensor)
 
-            sleep(SETTINGS.get('DEFINITIONS').get('sleep_interval'))
+            sleep(SLEEP_INTERVAL)
 
     except KeyboardInterrupt:
         sys.exit(0)
@@ -32,3 +34,4 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
+
