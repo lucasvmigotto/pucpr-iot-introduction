@@ -49,16 +49,16 @@ class DHT11:
 
     @property
     def temperature(self) -> float:
-        if self.__sensor.temperature() is None:
+        if self.__temperature is None:
             self.refresh()
-        return self.temperature
+        return self.__temperature
 
 
     @property
     def humidity(self) -> float:
         if self.__humidity is None:
             self.refresh()
-        return self.temperature
+        return self.__humidity
 
 
     @property
