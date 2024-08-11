@@ -1,9 +1,12 @@
 {
     "definitions": {
-        "sleep_interval": 1
+        "sleep_interval": 5,
+        "temperature_threshold": 31,
+        "humidity_threshold": 70
     },
     "sensors": {
-        "dht11": 15
+        "dht11": 15,
+        "relay": 13
     },
     "wifi": {
         "ssid": "",
@@ -15,5 +18,9 @@
             "write": "",
             "read": ""
         }
+    },
+    "logging": {
+        "level": "DEBUG",
+        "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
     }
 }

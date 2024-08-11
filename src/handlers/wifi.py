@@ -1,17 +1,20 @@
 import network
+from logging import Logger, getLogger
 from time import sleep
 from defaults import CONNECT_RETRY_TIMEOUT
+from helpers.settings import Settings
 
 
 class WiFiHandler:
 
     def __init__(
-        self, ssid:
-        str, password: str,
+        self,
+        settings: Settings,
         connect_retry_timeout: int = CONNECT_RETRY_TIMEOUT
     ):
-        self.__SSID: str = ssid
-        self.__PASSWORD: str = password
+        self.__logger: Logger = getLogger(__name__)
+        self.__SSID: str = settings.get_config('wifi', 'ssid')
+        self.__PASSWORD: str = settings.get_config('wifi', 'password')
         self.__CONNECT_RETRY_TIMEOUT: int = connect_retry_timeout
         self.wlan = None
 
@@ -21,13 +24,13 @@ class WiFiHandler:
         self.wlan.active(True)
         self.wlan.connect(self.__SSID, self.__PASSWORD)
         while not self.wlan.isconnected():
-            print('Waiting for connection...')
+            self.__logger.debug('Waiting for connection...')
             sleep(self.__CONNECT_RETRY_TIMEOUT)
-        print(f'Successfully connected with IP {self.wlan.ifconfig()[0]}')
+        self.__logger.info(f'Successfully connected with IP {self.wlan.ifconfig()[0]}')
         return self
 
 
     def __exit__(self, *exception_infos):
-        print(f'[{self.wlan.status()}] Disconnecting...')
+        self.__logger.debug(f'[{self.wlan.status()}] Disconnecting...')
         self.wlan.disconnect()
-        print(f'[{self.wlan.status()}] Disconnected')
+        self.__logger.debug(f'[{self.wlan.status()}] Disconnected')
