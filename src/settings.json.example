@@ -1,6 +1,6 @@
 {
     "definitions": {
-        "sleep_interval": 1,
+        "sleep_interval": 5,
         "min_temperature": 31,
         "min_humidity": 70
     },
@@ -17,5 +17,9 @@
             "write": "",
             "read": ""
         }
+    },
+    "logging": {
+        "level": "DEBUG",
+        "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
     }
 }
